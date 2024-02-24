@@ -5,7 +5,7 @@ import time
 
 pg.init()
 
-WIDTH = 500
+WIDTH = 600
 HEIGHT = 550
 
 screen = pg.display.set_mode([WIDTH, HEIGHT])
@@ -15,13 +15,13 @@ fps = 60
 timer = pg.time.Clock()
 
 font = pg.font.Font('freesansbold.ttf', 16)
-fontLG = pg.font.Font('freesansbold.ttf', 26)
+fontLG = pg.font.Font('freesansbold.ttf', 46)
 
 new_game = True
 
 tubes = 20
 min_tubes = 5
-max_tubes = 6
+max_tubes = 7
 level = 1
 colors = []
 initial_colors = []
@@ -76,33 +76,34 @@ def draw_tubes(tubes_num, tubes_cols):
         tubes_per_row = tubes_num // 2 + 1
         offset = True
     
-    spacing = WIDTH / tubes_per_row
+    spacing = 85
+    
 
     for i in range(tubes_per_row):
         for j in range(len(tubes_cols[i])):
-            pg.draw.rect(screen, color_choices[tubes_cols[i][j]], [5 + spacing * i, 200 - (50 * j), 65, 50], 0, 5)
-        box = pg.draw.rect(screen, 'white', [5 + spacing*i, 50, 65, 200], 5, 5)
+            pg.draw.rect(screen, color_choices[tubes_cols[i][j]], [15 + spacing * i, 200 - (50 * j), 65, 50], 0, 5)
+        box = pg.draw.rect(screen, 'white', [15 + spacing*i, 50, 65, 200], 5, 5)
         if select_rect == i:
-            pg.draw.rect(screen, 'red', [5 + spacing * i, 50, 65, 200], 5, 5)
+            pg.draw.rect(screen, 'red', [15 + spacing * i, 50, 65, 200], 5, 5)
         tube_boxes.append(box)
 
     if offset:
         for i in range(tubes_per_row - 1):
             for j in range(len(tubes_cols[i + tubes_per_row])):
-                pg.draw.rect(screen, color_choices[tubes_cols[i + tubes_per_row][j]], [(spacing * 0.5) + 5 + spacing*i, 450 - (50 * j), 65, 50], 0, 5)
+                pg.draw.rect(screen, color_choices[tubes_cols[i + tubes_per_row][j]], [15 + (spacing * 0.5) + spacing*i, 450 - (50 * j), 65, 50], 0, 5)
             
-            box = pg.draw.rect(screen, 'white', [(spacing * 0.5) + 5 + spacing * i, 300, 65, 200], 5, 5)
+            box = pg.draw.rect(screen, 'white', [15 + (spacing * 0.5) + spacing * i, 300, 65, 200], 5, 5)
             if select_rect == i + tubes_per_row:
-                pg.draw.rect(screen, 'red', [(spacing * 0.5) + 5 + spacing * i, 300, 65, 200], 5, 5)
+                pg.draw.rect(screen, 'red', [15 + (spacing * 0.5) + spacing * i, 300, 65, 200], 5, 5)
             tube_boxes.append(box)    
     else:
         for i in range(tubes_per_row):
             for j in range(len(tubes_cols[i + tubes_per_row])):
-                pg.draw.rect(screen, color_choices[tubes_cols[i + tubes_per_row][j]], [5 + spacing*i, 450 - (50*j), 65, 50], 0, 3)
+                pg.draw.rect(screen, color_choices[tubes_cols[i + tubes_per_row][j]], [15 + spacing*i, 450 - (50*j), 65, 50], 0, 3)
 
-            box = pg.draw.rect(screen, 'white', [5 + spacing*i, 300, 65, 200], 5, 3)
+            box = pg.draw.rect(screen, 'white', [15 + spacing*i, 300, 65, 200], 5, 3)
             if select_rect == i + tubes_per_row:
-                pg.draw.rect(screen, 'red', [5 + spacing * i, 300, 65, 200], 5, 5)
+                pg.draw.rect(screen, 'red', [15 + spacing * i, 300, 65, 200], 5, 5)
             tube_boxes.append(box)
     return tube_boxes
 
@@ -191,8 +192,8 @@ while run:
                         select_rect = 100
 
     if win:
-        victory_text = fontLG.render('You Win!', True, 'white')
-        screen.blit(victory_text, (30, 265))
+        victory_text = fontLG.render('You Win!', True, 'gold')
+        screen.blit(victory_text, (70, 255))
 
     level_text = font.render(('Level: %d' % level), True,'lightgrey')
     screen.blit(level_text,(10,10))
