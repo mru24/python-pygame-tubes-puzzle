@@ -1,2 +1,2 @@
-time.sleep(3)
-        # new_game = True
+
+    # print(tubes_colors, tubes_number)
